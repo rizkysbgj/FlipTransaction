@@ -1,33 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 
-import React from 'react';
+import React, {Component} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
-  Text,
   TextInput,
-  StatusBar,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/EvilIcons'
-
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
 import Transaction from './src/Transaction';
+
+handleSearch = (text) => {
+  const formatQuery = text.toLowerCase();
+  console.log("text", formatQuery);
+  this.child.filter(formatQuery);
+}
 
 const App: () => React$Node = () => {
   return (
@@ -36,9 +24,9 @@ const App: () => React$Node = () => {
         <View style={styles.topBar}></View>
         <View style={styles.searchBar}>
           <Icon style={{padding: 10}} name='search' size={40} color="#a9a9a9" />
-          <TextInput style={{fontSize: 25, width: '100%'}}/>
+          <TextInput style={{fontSize: 25, width: '100%'}} onChangeText={this.handleSearch}/>
         </View>
-        <Transaction />
+        <Transaction ref={child => {this.child = child}} {...this.props}/>
       </View>
     </>
   );
